@@ -64,6 +64,8 @@ public:
 	 */
 	void setRotation(byte rotation);
 
+  void setFlip(boolean horizontal, boolean vertical);
+
   /*
    * Draw a pixel on your canvas. Note that for performance reasons,
    * the pixels are not actually send to the displays. Only the internal
@@ -112,6 +114,9 @@ private:
   byte hDisplays;
   byte *matrixPosition;
   byte *matrixRotation;
+
+  boolean flipHorizontal;
+  boolean flipVertical;
 };
 
 #endif	// Max72xxPanel_h

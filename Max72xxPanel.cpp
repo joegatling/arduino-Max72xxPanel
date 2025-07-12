@@ -87,6 +87,11 @@ void Max72xxPanel::setRotation(uint8_t rotation) {
 	Adafruit_GFX::setRotation(rotation);
 }
 
+void Max72xxPanel::setFlip(boolean horizontal, boolean vertical) {
+  flipHorizontal = horizontal;
+  flipVertical = vertical;
+}
+
 void Max72xxPanel::shutdown(boolean b) {
   spiTransfer(OP_SHUTDOWN, b ? 0 : 1);
 }
@@ -122,6 +127,14 @@ void Max72xxPanel::drawPixel(int16_t xx, int16_t yy, uint16_t color) {
 			tmp = x; x = y; y = tmp;
 		}
 	}
+
+	if (flipHorizontal) {
+		x = _width - 1 - x;
+	}
+
+	if (flipVertical) {
+		y = _height - 1 - y;
+	}	
 
 	if ( x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT ) {
 		// Ignore pixels outside the canvas.
